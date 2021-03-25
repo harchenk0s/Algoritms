@@ -36,6 +36,7 @@ namespace Algoritmes
 
         public void Solve()
         {
+            Display.RefreshDisplay(towers);
             if (IsEven(TowerHeight))
             {
                 strategy = new EvenNumberAlg(towers);
@@ -110,7 +111,7 @@ namespace Algoritmes
                 int A = 0;
                 int B = 0;
 
-                for (int i = 0; i < towers[posA].Count; i++)
+                for (int i = towers[posA].Count-1; i > 0; i--)
                 {
                     if(towers[posA][i] != 0)
                     {
@@ -119,7 +120,7 @@ namespace Algoritmes
                     }
                 }
 
-                for (int i = 0; i < towers[posB].Count; i++)
+                for (int i = towers[posB].Count-1; i > 0; i--)
                 {
                     if (towers[posB][i] != 0)
                     {
@@ -133,13 +134,11 @@ namespace Algoritmes
                     if (A > B)
                     {
                         towers[posB].Add(A);
-                        towers[posA].RemoveAt(A);
                     }
 
                     if (A < B)
                     {
                         towers[posA].Add(B);
-                        towers[posB].RemoveAt(B);
                     }
                 }
             }
@@ -147,7 +146,7 @@ namespace Algoritmes
             void Process()
             {
                 Console.ReadKey(false);
-                //DisplayTower(towers);
+                Display.RefreshDisplay(towers);
             }
         }
 
@@ -215,6 +214,7 @@ namespace Algoritmes
                         A = towers[posA][i];
                         break;
                     }
+                    A = towers[posA].Count;
                 }
 
                 for (int i = 0; i < towers[posB].Count; i++)
@@ -224,20 +224,21 @@ namespace Algoritmes
                         B = towers[posB][i];
                         break;
                     }
+                    B = towers[posB].Count;
                 }
 
                 if (A != B)
                 {
                     if (A > B)
                     {
-                        towers[posB].Add(A);
-                        towers[posA].RemoveAt(A);
+                        towers[posB].Insert(0, A);
+                        towers[posA][A] = 0;
                     }
 
                     if (A < B)
                     {
-                        towers[posA].Add(B);
-                        towers[posB].RemoveAt(B);
+                        towers[posA].Insert(0, B);
+                        towers[posB][B] = 0;
                     }
                 }
             }
@@ -245,11 +246,59 @@ namespace Algoritmes
             void Process()
             {
                 Console.ReadKey(false);
-                //DisplayTower(towers);
+                Display.RefreshDisplay(towers);
             }
         }
 
 
+        public static class Display
+        {
+            public static void RefreshDisplay(List<List<int>> list)
+            {
+                Console.Clear();
+                for (int i = 0; i < list[0].Count + 25; i++)
+                {
+                    Console.Write("=");
+                }
 
+                Console.WriteLine("\n");
+
+                for (int i = list[0].Count; i > 0 ; i--)
+                {
+                    for (int k = 0; k < 3; k++)
+                    {
+                        Console.Write("  ");
+                        for (int j = 0; j < list[k].Count / 2; j++)
+                        {
+                            Console.Write(" ");
+                        }
+
+
+                        if (list[k][list[k].Count - i] == 0)
+                        {
+                            Console.Write("|");
+                        }
+                        else
+                        {
+                            Console.Write(list[k][list[k].Count - i]);
+                        }
+
+
+                        for (int j = 0; j < list[k].Count / 2; j++)
+                        {
+                            Console.Write(" ");
+                        }
+                        Console.Write("  ");
+                    }
+                    Console.Write("\n");
+
+                }
+
+                for (int i = 0; i < list[0].Count + 25; i++)
+                {
+                    Console.Write("_");
+                }
+            }
+        }
     }
 }
