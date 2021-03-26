@@ -112,63 +112,65 @@ namespace Algoritmes
                 }
             }
 
+
             void Swap(int posA, int posB)
             {
-                int A = 0;
-                int B = 0;
+                int indexA = 0;
+                int indexB = 0;
 
                 for (int i = 0; i < list[posA].Count; i++)
                 {
                     if (list[posA][i] != 0)
                     {
-                        A = list[posA][i];
+                        indexA = list[posA][i];
                     }
                 }
-                A = list[posA].IndexOf(A);
+                indexA = list[posA].IndexOf(indexA);
 
                 for (int i = 0; i < list[posB].Count; i++)
                 {
                     if (list[posB][i] != 0)
                     {
-                        B = list[posB][i];
+                        indexB = list[posB][i];
                     }
                 }
-                B = list[posB].IndexOf(B);
+                indexB = list[posB].IndexOf(indexB);
 
 
-                if (list[posA][A] > list[posB][B])
+                if (list[posA][indexA] > list[posB][indexB])
                 {
-                    if(list[posB][B] == 0)
+                    if(list[posB][indexB] == 0)
                     {
-                        list[posB][B] = list[posA][A];
-                        list[posA][A] = 0;
+                        list[posB][indexB] = list[posA][indexA];
+                        list[posA][indexA] = 0;
                     }
                     else
                     {
-                        list[posA][A + 1] = list[posB][B];
-                        list[posB][B] = 0;
+                        list[posA][indexA + 1] = list[posB][indexB];
+                        list[posB][indexB] = 0;
                     }
                 }
-                else if(list[posA][A] < list[posB][B])
+                else if(list[posA][indexA] < list[posB][indexB])
                 {
-                    if(list[posA][A] == 0)
+                    if(list[posA][indexA] == 0)
                     {
-                        list[posA][A] = list[posB][B];
-                        list[posB][B] = 0;
+                        list[posA][indexA] = list[posB][indexB];
+                        list[posB][indexB] = 0;
                     }
                     else
                     {
-                        list[posB][B + 1] = list[posA][A];
-                        list[posA][A] = 0;
+                        list[posB][indexB + 1] = list[posA][indexA];
+                        list[posA][indexA] = 0;
                     }
                 }
             }
+
 
             void Process(int count, int max)
             {
                 Console.ReadKey(false);
                 Display.RefreshDisplay(list);
-                Console.WriteLine($"Steps: {max}\nStep:{count}");
+                Console.WriteLine($"Steps: {max}\nStep: {count}");
             }
         }
 
@@ -223,6 +225,7 @@ namespace Algoritmes
                     }
                 }
             }
+
 
             void Swap(int posA, int posB)
             {
@@ -280,7 +283,7 @@ namespace Algoritmes
             {
                 Console.ReadKey(false);
                 Display.RefreshDisplay(list);
-                Console.WriteLine($"Steps: {max}\nStep:{count}");
+                Console.WriteLine($"Steps: {max}\nStep: {count}");
             }
         }
 
